@@ -57,7 +57,7 @@ def tokenize(string: str, unique=False, sorted=False) -> list:
     if sorted:
         tokens = sorted(tokens)
 
-    # Return a 'sorted' set
+    # Return tokens
     return tokens
 
 # -----------------------------------------------
@@ -203,8 +203,18 @@ all(i2t[t2i[tok]] == tok for tok in t2i)  # should be True
 # -----------------------------------------------
 def tokenize_and_encode(documents: list) -> list:
     # Hint: use your make_vocabulary_map and tokenize function
-    enc = []
-    t2i, i2t = make_vocabulary_map([documents])
+    enc = list()
+
+    i2t, t2i = make_vocabulary_map(documents)
+
+    # My attempt
+    for idtext, text in enumerate(documents):
+        enc.append(list())
+        for idword, word in enumerate(tokenize(text)):
+            enc[idtext].append(t2i[word])
+
+    # With comprehension using ChatGPT
+    enc = [[t2i[word] for word in tokenize(text)] for text in documents]
 
     return enc, t2i, i2t
 
@@ -232,7 +242,7 @@ def tokenize_and_encode(documents: list) -> list:
 
 # Your code here:
 # -----------------------------------------------
-# sigmoid = _  # Your code
+sigmoid = lambda x: 1/ (1 + np.exp(-x))
 
 # Test:
 # np.all(sigmoid(np.log([1, 1 / 3, 1 / 7])) == np.array([1 / 2, 1 / 4, 1 / 8]))
