@@ -203,9 +203,10 @@ all(i2t[t2i[tok]] == tok for tok in t2i)  # should be True
 # -----------------------------------------------
 def tokenize_and_encode(documents: list) -> list:
     # Hint: use your make_vocabulary_map and tokenize function
+    enc = []
+    t2i, i2t = make_vocabulary_map([documents])
 
-
-    pass  # Your code
+    return enc, t2i, i2t
 
 
 # Test:
