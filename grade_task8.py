@@ -13,4 +13,5 @@ def test_encode_sentences():
         "This is a long document that contains many words, phrases, and repeated occurrences. Words, phrases, and sentences repeat to test scalability."
     ]
     enc, t2i, i2t = tokenize_and_encode(docs)
-    # assert " | ".join([" ".join(i2t[i] for i in e) for e in enc]) == " | ".join(" ".join(tokenize(d)) for d in docs)
+    assert " | ".join([" ".join(i2t[i] for i in e) for e in enc]) == " | ".join(
+        " ".join(tokenize(d)) for d in docs)
