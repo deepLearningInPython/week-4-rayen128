@@ -1,43 +1,12 @@
 import numpy as np
+from tasks import tokenize, token_counts, make_vocabulary_map
+
+# text = "The quick brown fox jumps over the lazy dog!"
+
+text = """The quick brown fox jumps over the lazy dog. The fox and the dog play together.
+              The fox chases the dog, but the dog runs quickly. The fox is fast, and the dog escapes."""
 
 
-text = "The quick brown fox jumps over the lazy dog!"
+t2i, i2t = make_vocabulary_map([text])
 
-
-def tokenize(string: str) -> list:
-    # Remove punctuation manually
-    punctuation = "!?@#$%^&*(),."
-
-    cleaned_string = ''.join(
-        char if char not in punctuation else '' for char in string)
-
-    # Split into words, convert to lowercase, and remove duplicates
-    tokens = [word.lower() for word in cleaned_string.split()]
-
-    return sorted(set(tokens))
-
-
-def token_to_id(text):
-    token_to_id = {word.lower(): i for i,
-                   word in enumerate(set(tokenize(text)))}
-
-    return token_to_id
-
-
-documents = ["hallo, ik ben Rayen", "Goedemorgen rayen, hoe gaat het?"]
-
-tokens = set()
-
-for text in documents:
-    for word in tokenize(text):
-        tokens = tokens.union(tokenize(text))
-
-token_to_id = {}
-id_to_token = {}
-
-for i, word in enumerate(tokens):
-    token_to_id[i] = word
-    id_to_token[word] = i
-
-print(token_to_id)
-print(id_to_token)
+print(i2t)
